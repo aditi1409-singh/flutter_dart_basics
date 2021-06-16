@@ -8,13 +8,32 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer:  Drawer(
+        child: Padding(
+          padding: const EdgeInsets.all(60.0),
+          child: Text('FUCK YOU'),
+        ),
+      ),
       appBar: AppBar(
-        title: Text('Program List'),
+        title: Center(
+            child: Text('Program List')
+        ),
+
       ),
       body: Column(
         children: [
           InkWell(
-            child: Text('Username'),
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Center(
+                  child: Text(
+                      'Username',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+              ),
+            ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserName()));
             },

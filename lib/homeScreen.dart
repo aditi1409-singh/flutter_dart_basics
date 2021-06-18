@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dart_app/programs/multipleOfTwo.dart';
+import 'package:flutter_dart_app/programs/primeNumber.dart';
 import 'package:flutter_dart_app/programs/userName.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -36,6 +37,21 @@ class HomeScreen extends StatelessWidget {
             ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => MultiplePage()));
+            },
+          ),
+          InkWell(
+            child :Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Text(
+                'Prime Number',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => PrimeNumber()));
             },
           ),
           InkWell(

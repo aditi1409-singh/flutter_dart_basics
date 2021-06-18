@@ -10,9 +10,8 @@ class MultiplePage extends StatefulWidget {
 
 class _MultiplePageState extends State<MultiplePage> {
 
-  double num1 = 0;
-  double num2 = 0;
-  double resultNum;
+  double num1;
+  double num2;
 
   @override
   Widget build(BuildContext context) {
@@ -23,69 +22,71 @@ class _MultiplePageState extends State<MultiplePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
-        child: Column(
-          children: [
-            TextField(
-              onSubmitted: (number1) {
-                setState(() {
-                  num1 = double.parse(number1);
-                });
-                print(num1);
-              } ,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32.0)),
-              ),
-            ),
-            SizedBox(height: 20,),
-            Text(
-              'X',
-              style: TextStyle(
-                fontSize: 30,
-              ),
-            ),
-            SizedBox(height: 20,),
-            TextField(
-              onSubmitted: (number2) {
-                setState(() {
-                  num2 = double.parse(number2) ;
-                });
-                print(num2);
-              },
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32.0)),
-              ),
-            ),
-            SizedBox(height: 20,),
-            Text(
-              '=',
-              style: TextStyle(
-                fontSize: 30,
-              ),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              margin: EdgeInsets.all(25),
-              child:  MaterialButton(
-                child: Text('Tap For Answer', style: TextStyle(fontSize: 30.0),),
-                color: Colors.blue[400],
-                textColor: Colors.white,
-                onPressed: () {
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextField(
+                onChanged: (number1) {
+                  try {
                     setState(() {
-                      resultNum = num1*num2;
+                      num1 = double.parse(number1);
                     });
-                    print(resultNum);
-                },
+                  } catch (e){
+                    print(e.toString());
+                    setState(() {
+                      num1 = null;
+                    });
+                  }
+                } ,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32.0)),
+                ),
               ),
-            ),
-            SizedBox(height: 40,),
-            Text(
-              'Result = $resultNum',
-            )
-          ],
+              SizedBox(height: 20,),
+              Text(
+                'X',
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+              SizedBox(height: 20,),
+              TextField(
+                onChanged: (number2) {
+                  try {
+                    setState(() {
+                      num2 = double.parse(number2);
+                    });
+                  }catch(e){
+                    print(e.toString());
+                    setState(() {
+                      num2 = null;
+                    });
+                  }
+                },
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32.0)),
+                ),
+              ),
+              SizedBox(height: 20,),
+              Text(
+                '=',
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+              SizedBox(height: 40,),
+              num1 == null || num2 == null ? Container() : Text(
+                'Result = ${num1*num2}',
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

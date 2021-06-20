@@ -5,6 +5,7 @@ import 'package:flutter_dart_app/programs/primeNumber.dart';
 import 'package:flutter_dart_app/programs/userName.dart';
 import 'package:flutter_dart_app/programs/table.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
 
   List<String> programName = ['Product' , 'PrimeNumber' , 'Username' ,'Table'];

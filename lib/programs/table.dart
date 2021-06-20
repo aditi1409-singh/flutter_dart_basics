@@ -8,10 +8,12 @@ class TableScreen extends StatefulWidget {
   _TableScreenState createState() => _TableScreenState();
 }
 
+class _TableScreenState extends State<TableScreen> {
+
   double num;
   int range;
+  String error = '';
 
-class _TableScreenState extends State<TableScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +32,10 @@ class _TableScreenState extends State<TableScreen> {
                   setState(() {
                     num = double.parse(number);
                   });
-                }catch(error){
-                  print(error.toString());
+                }catch(e){
+                  print(e.toString());
                   setState(() {
+                    error = 'Enter Valid Number';
                     num = null;
                   });
                 }
@@ -51,9 +54,10 @@ class _TableScreenState extends State<TableScreen> {
                   setState(() {
                     range = int.parse(rangeData);
                   });
-                }catch(error){
-                  print(error.toString());
+                }catch(e){
+                  print(e.toString());
                   setState(() {
+                    error = 'Enter Valid Number';
                     range = null;
                   });
                 }
@@ -67,11 +71,18 @@ class _TableScreenState extends State<TableScreen> {
               ),
             ),
             SizedBox(height: 20,),
-            Text(
+            num == null ? Container() : Text(
                 'Table of $num',
               style: TextStyle(
                 fontSize: 30,
                 color: Colors.blue,
+              ),
+            ),
+            Text(
+              error,
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.red,
               ),
             ),
             range == null || num == null ? Container() : Expanded(

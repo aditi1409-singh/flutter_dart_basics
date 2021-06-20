@@ -12,9 +12,9 @@ class PrimeNumber extends StatefulWidget {
 
 class _PrimeNumberState extends State<PrimeNumber> {
 
-  int startNum = 1;
   int endNum = 0;
   bool isPrime;
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +33,35 @@ class _PrimeNumberState extends State<PrimeNumber> {
                 TextField(
                   onSubmitted: (number) {
                     try {
-                    endNum = int.parse(number);
-                    for(startNum = 2 ; startNum <= endNum ; startNum++){
-                      if((endNum % startNum) == 0){
+                      endNum = int.parse(number);
+                      if(endNum <= 1) {
                         setState(() {
-                          isPrime = false;
+                          error = 'Number must be bigger than 1';
+                          isPrime = null;
                         });
                         return;
+                      }
+
+                      error = '';
+
+                      for( int startNum = 2 ; startNum < endNum ; startNum++) {
+                        if ((endNum % startNum) == 0) {
+                          setState(() {
+                            isPrime = false;
+                          });
+                          return;
+                        }
                       }
                       setState(() {
                         isPrime= true;
                       });
-
-                    }
                   } catch (e){
                     print(e.toString());
-                      setState(() {
-                    endNum = null;
+                    setState(() {
+                      error = 'PLEASE ENTER VALID NUMBER';
+                      endNum = null;
                     });
-                    }
+                  }
                 } ,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -62,12 +72,19 @@ class _PrimeNumberState extends State<PrimeNumber> {
                 SizedBox(height: 20,),
                 isPrime == null ? Container() :
                 Text(
-                  '$endNum is ' + (isPrime  ? 'PRIME' : 'COMPOSITE') ,
+                  '$endNum is ${isPrime  ? 'PRIME' : 'COMPOSITE'}' ,
                   style: TextStyle(
                     fontSize: 30,
                   ),
                 ),
                 SizedBox(height: 20,),
+                Text(
+                  error,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 20,
+                  ),
+                )
             ]
           ),
       ),

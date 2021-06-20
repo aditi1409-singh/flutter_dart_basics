@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dart_app/programs/multipleOfTwo.dart';
 import 'package:flutter_dart_app/programs/primeNumber.dart';
 import 'package:flutter_dart_app/programs/userName.dart';
+import 'package:flutter_dart_app/programs/table.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key key}) : super(key: key);
+
+  List<String> programName = ['Product' , 'PrimeNumber' , 'Username' ,'Table'];
+  List<Widget> programScreen = [MultiplePage() , PrimeNumber() , UserName() , TableScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -20,56 +23,24 @@ class HomeScreen extends StatelessWidget {
         title: Center(
             child: Text('Program List')
         ),
-
       ),
-      body: Column(
-        children: [
-          InkWell(
-            child: Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: Text(
-                'Multiples',
-                style: TextStyle(
-                  fontSize: 25,
+      body: ListView.builder(
+        itemCount: programScreen.length,
+        itemBuilder: (context, index) =>  InkWell(
+              child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: Text(
+                  programName[index],
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => programScreen[index]));
+              },
             ),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MultiplePage()));
-            },
-          ),
-          InkWell(
-            child :Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: Text(
-                'Prime Number',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => PrimeNumber()));
-            },
-          ),
-          InkWell(
-            child: Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: Text(
-                  'Username',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserName()));
-            },
-          )
-        ],
       ),
     );
   }

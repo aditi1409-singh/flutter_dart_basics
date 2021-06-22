@@ -31,6 +31,7 @@ class _TableScreenState extends State<TableScreen> {
                 try{
                   setState(() {
                     num = double.parse(number);
+                    error = '';
                   });
                 }catch(e){
                   print(e.toString());
@@ -53,6 +54,7 @@ class _TableScreenState extends State<TableScreen> {
                 try{
                   setState(() {
                     range = int.parse(rangeData);
+                    error = '';
                   });
                 }catch(e){
                   print(e.toString());

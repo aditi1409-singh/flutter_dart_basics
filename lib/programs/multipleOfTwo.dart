@@ -18,7 +18,7 @@ class _MultiplePageState extends State<MultiplePage> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-            child: Text('Input Values')),
+            child: Text("Input Product's Values")),
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
@@ -39,6 +39,7 @@ class _MultiplePageState extends State<MultiplePage> {
                   }
                 } ,
                 decoration: InputDecoration(
+                  hintText: 'Enter First Number',
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(32.0)),
@@ -66,6 +67,7 @@ class _MultiplePageState extends State<MultiplePage> {
                   }
                 },
                 decoration: InputDecoration(
+                  hintText: 'Enter Second Number',
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(32.0)),

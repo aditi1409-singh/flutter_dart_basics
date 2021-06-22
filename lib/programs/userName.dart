@@ -30,6 +30,7 @@ class _UserNameState extends State<UserName> {
                 });
               },
               decoration: InputDecoration(
+                hintText: 'Username',
                 border: OutlineInputBorder(),
               ),
             ),

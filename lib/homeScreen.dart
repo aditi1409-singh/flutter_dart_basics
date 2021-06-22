@@ -2,14 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dart_app/programs/multipleOfTwo.dart';
 import 'package:flutter_dart_app/programs/primeNumber.dart';
+import 'package:flutter_dart_app/programs/userInput.dart';
 import 'package:flutter_dart_app/programs/userName.dart';
 import 'package:flutter_dart_app/programs/table.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
 
-  List<String> programName = ['Product' , 'PrimeNumber' , 'Username' ,'Table'];
-  List<Widget> programScreen = [MultiplePage() , PrimeNumber() , UserName() , TableScreen()];
+  List<String> programName = ['Product' , 'PrimeNumber' , 'Username' ,'Table' , 'Username List'];
+  List<Widget> programScreen = [MultiplePage() , PrimeNumber() , UserName() , TableScreen() , UserInput()];
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => programScreen[index]));
+                Navigator.of(context).push(CupertinoPageRoute(builder: (context) => programScreen[index]));
               },
             ),
       ),

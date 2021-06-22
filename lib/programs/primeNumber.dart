@@ -62,6 +62,7 @@ class _PrimeNumberState extends State<PrimeNumber> {
                   }
                 } ,
                 decoration: InputDecoration(
+                  hintText: 'Enter a Number',
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(32.0)),

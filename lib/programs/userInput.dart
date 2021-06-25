@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_dart_app/programs/userName.dart';
 
 class UserInput extends StatefulWidget {
@@ -11,10 +12,11 @@ class UserInput extends StatefulWidget {
 
 class _UserInputState extends State<UserInput> {
 
-  int num;
   String error = '';
-  String enteredNames ;
+  String searchResult = '';
   List<String> names = [];
+  TextEditingController inputController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,22 +31,80 @@ class _UserInputState extends State<UserInput> {
         child: Column(
           children: [
             TextField(
-              onChanged: (newEnteredNames){
-                    enteredNames = newEnteredNames;
-                    names.add(newEnteredNames);
-                },
+              controller: inputController,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsetsDirectional.fromSTEB(40, 10, 40, 10),
+                hintText: 'Enter a UserInput',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(32.0),
+                ),
+              ),
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 20,),
             InkWell(
-              child: Icon(
-                Icons.add,
-                size: 20,
-                color: Colors.blue,
+              child: Container(
+                child: Icon(
+                  Icons.add,
+                  size: 30,
+                  color: Colors.white,
+                ),
+                margin: EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(20),
+                ) ,
               ),
               onTap: (){
-                setState(() {
-                });
+                if(inputController.value.text.isNotEmpty) {
+                  setState(() {
+                    names.add(inputController.value.text);
+                    inputController.clear();
+                    error = '';
+                  });
+              } else{
+                  setState(() {
+                    error = 'Enter Valid Input';
+                  });
+                }
               },
+            ),
+            TextField(
+              controller: searchController,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsetsDirectional.fromSTEB(40, 10, 40, 10),
+                hintText: 'Search UserInput',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(32.0),
+                ),
+              ),
+            ),
+            SizedBox(height: 20,),
+            InkWell(
+              child: Container(
+                child: Icon(
+                  Icons.search,
+                  size: 30,
+                  color: Colors.white,
+                ),
+                margin: EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(20),
+                ) ,
+              ),
+                onTap: () {
+                if(names.contains(searchController.value.text)){
+                  setState(() {
+                    searchResult = 'Name is present in the list';
+                      return true;
+                  });
+                }else{
+                  setState(() {
+                      return false;
+                  });
+                  error = 'Name is not present in the list';
+                }
+                },
             ),
              Expanded(
                child: ListView(
@@ -58,6 +118,20 @@ class _UserInputState extends State<UserInput> {
                     )
             ),
              ),
+            Text(
+                error,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.red,
+              ),
+            ),
+            Text(
+              searchResult,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.blue,
+              ),
+            ),
           ],
         ),
       ),
